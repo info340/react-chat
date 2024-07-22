@@ -1,14 +1,35 @@
+import React, { useState } from 'react';
+
 import { ComposeForm } from './ComposeForm.js'
 
 import INITIAL_CHAT_LOG from '../data/chat_log.json'
 
 export function ChatPane(props) {
-  //console.log("rendering the ChatPane")  
-
+  console.log("rendering the ChatPane")  
   const { currentChannel } = props;
 
+  const [messageArray, setMessageArray] = useState(INITIAL_CHAT_LOG);
+
+  const addMessage = (userId, userName, msgText) => {
+    //add a new message to the state
+    const newMessageObj = {
+      "userId": userId,
+      "userName": userName,
+      "userImg": "/img/"+userName+".png",
+      "text": msgText,
+      "timestamp": Date.now(),
+      "channel": currentChannel
+    }
+
+    //makes a copy
+    const updateMessageArray = [...messageArray, newMessageObj];
+
+    //update the state AND re-renders
+    setMessageArray(updateMessageArray);
+  }
+
   //DATA PROCESSING
-  const messageObjArray = INITIAL_CHAT_LOG
+  const messageObjArray = messageArray
     .filter((chatObj) => chatObj.channel === currentChannel)
     .sort((m1, m2) => m1.timestamp - m2.timestamp); //chron order
 
@@ -22,8 +43,8 @@ export function ChatPane(props) {
     <div className="scrollable-pane mt-2">
       {/* Messages */}
       {messageElemArray}
-    
-      <ComposeForm />
+
+      <ComposeForm addMessageFunction={addMessage} />
     </div>
   )
 }
