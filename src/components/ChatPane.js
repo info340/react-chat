@@ -5,7 +5,7 @@ import { ComposeForm } from './ComposeForm.js'
 import INITIAL_CHAT_LOG from '../data/chat_log.json'
 
 export function ChatPane(props) {
-  const { currentChannel } = props;
+  const { currentChannel, currentUser } = props;
 
   const [msgStateArray, setMsgStateArray] = useState(INITIAL_CHAT_LOG);
 
@@ -47,7 +47,7 @@ export function ChatPane(props) {
         {messageElemArray}
       </div>
 
-      <ComposeForm currentChannel={currentChannel} addMessageFunction={addMessage} />
+      <ComposeForm currentUser={currentUser} currentChannel={currentChannel} addMessageFunction={addMessage} />
   </>
   )
 }

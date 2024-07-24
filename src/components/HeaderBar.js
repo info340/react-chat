@@ -8,6 +8,7 @@ const DEFAULT_USERS = [
 ]
 
 export function HeaderBar(props) {
+  const { currentUser, changeUserFunction } = props;
 
   //event handler
   const handleClick = (event) => {
@@ -16,11 +17,19 @@ export function HeaderBar(props) {
 
     console.log(selectedUserObj);
     //do something with userObj!
+
+    //change the state variable
+    changeUserFunction(selectedUserObj);
+
   }
 
   //for convenience
   const userButtons = DEFAULT_USERS.map((userObj) => {
     let classListString = "btn user-icon"
+
+    if(userObj.userId === currentUser.userId){
+      classListString += " bg-success"
+    }
 
     return (
       <button className={classListString} key={userObj.userName} 
