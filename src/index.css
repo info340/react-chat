@@ -19,6 +19,19 @@ html, body, #root, #root>div {
   color: white;
 }
 
+/** Header **/
+header img {
+  width:40px;
+  border-radius: 50%;
+}
+
+header button.user-icon {
+  padding: .25rem;
+}
+
+.highlighted {
+  border: 3px solid greenyellow;
+}
 
 /** Messages **/
 .scrollable-pane {
@@ -55,4 +68,8 @@ html, body, #root, #root>div {
 /** Compose Form **/
 textarea.form-control {
   resize: none;
+}
+
+.input-group img {
+  max-width:75px;
 }

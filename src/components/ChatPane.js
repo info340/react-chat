@@ -5,49 +5,53 @@ import { ComposeForm } from './ComposeForm.js'
 import INITIAL_CHAT_LOG from '../data/chat_log.json'
 
 export function ChatPane(props) {
-  console.log("rendering the ChatPane")  
   const { currentChannel } = props;
 
-  const [messageArray, setMessageArray] = useState(INITIAL_CHAT_LOG);
+  const [msgStateArray, setMsgStateArray] = useState(INITIAL_CHAT_LOG);
 
-  const addMessage = (userId, userName, msgText) => {
-    //add a new message to the state
+  /* STATE MANAGEMENT: how do we change */
+  const addMessage = (userObj, msgText) => {
     const newMessageObj = {
-      "userId": userId,
-      "userName": userName,
-      "userImg": "/img/"+userName+".png",
+      "userId": userObj.userId,
+      "userName": userObj.userName,
+      "userImg": userObj.userImg,
       "text": msgText,
       "timestamp": Date.now(),
       "channel": currentChannel
     }
 
-    //makes a copy
-    const updateMessageArray = [...messageArray, newMessageObj];
-
-    //update the state AND re-renders
-    setMessageArray(updateMessageArray);
+    const updateMessageArray = [...msgStateArray, newMessageObj];
+    setMsgStateArray(updateMessageArray); //update the state and re-render
   }
 
-  //DATA PROCESSING
-  const messageObjArray = messageArray
+  /* RENDERING: what do we look like */
+  // Data Processing (structure data)
+  const messageObjArray = msgStateArray
     .filter((chatObj) => chatObj.channel === currentChannel)
     .sort((m1, m2) => m1.timestamp - m2.timestamp); //chron order
 
-  //RENDERING
+  // Displaying Data (convert to HTML)
   const messageElemArray = messageObjArray.map((chatObj) => {
     const elem = <MessageItem key={chatObj.timestamp} messageData={chatObj} />
     return elem; //put it in the new array!
   });
 
   return (
-    <div className="scrollable-pane mt-2">
-      {/* Messages */}
-      {messageElemArray}
+    <> {/* fake div */}
+      <div className="scrollable-pane pt-2 my-2">
+        {/* conditional rendering */}
+        { messageElemArray.length === 0 && 
+          <p>No messages yet</p>
+        }
 
-      <ComposeForm addMessageFunction={addMessage} />
-    </div>
+        {messageElemArray}
+      </div>
+
+      <ComposeForm currentChannel={currentChannel} addMessageFunction={addMessage} />
+  </>
   )
 }
+
 
 function MessageItem(props) {
   const messageData = props.messageData;
