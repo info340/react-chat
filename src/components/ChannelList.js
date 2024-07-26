@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 
 export function ChannelList(props){
   const {channelNames, currentChannel} = props;
@@ -12,7 +13,7 @@ export function ChannelList(props){
 
     const transformed = (
       <li className={classListString} key={channelNameString}>
-        <a className="text-white" href={"/chat/"+channelNameString}>{channelNameString}</a>
+        <Link className="text-white" to={"/chat/"+channelNameString}>{channelNameString}</Link>
       </li>
     );
     return transformed
