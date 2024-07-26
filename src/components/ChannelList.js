@@ -12,7 +12,7 @@ export function ChannelList(props){
 
     const transformed = (
       <li className={classListString} key={channelNameString}>
-        <a className="text-white" href={"/"+channelNameString}>{channelNameString}</a>
+        <a className="text-white" href={"/chat/"+channelNameString}>{channelNameString}</a>
       </li>
     );
     return transformed

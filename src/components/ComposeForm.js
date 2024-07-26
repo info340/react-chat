@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 export function ComposeForm(props){
-  const { addMessageFunction, currentUser } = props;
+  const { addMessageFunction, currentUser, currentChannel } = props;
 
   const [typedInput, setTypedInput] = useState('');
 
@@ -11,10 +11,9 @@ export function ComposeForm(props){
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("form submitted");
 
     //add the messsage!
-    addMessageFunction(currentUser, typedInput)
+    addMessageFunction(currentUser, typedInput, currentChannel)
 
     setTypedInput('');
   }
@@ -24,9 +23,9 @@ export function ComposeForm(props){
       <div className="input-group">
         <img src={currentUser.userImg} alt={currentUser.userName + " avatar"} />
         <textarea className="form-control" rows="2" 
-        placeholder="Type a new message"
-        value={typedInput}
-        onChange={handleChange}
+          placeholder="Type a new message"
+          value={typedInput}
+          onChange={handleChange}
         ></textarea>
         <button className="btn btn-secondary" type="submit">
           <span className="material-icons">send</span>

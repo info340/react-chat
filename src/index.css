@@ -9,16 +9,6 @@ html, body, #root, #root>div {
   top: 4px;
 }
 
-
-/** Channel Nav **/
-.channel-nav ul {
-  list-style-type: none;
-}
-
-.channel-nav a {
-  color: white;
-}
-
 /** Header **/
 header img {
   width:40px;
@@ -31,6 +21,30 @@ header button.user-icon {
 
 .highlighted {
   border: 3px solid greenyellow;
+}
+
+/* navlinks */
+.bg-primary .nav-link {
+  color: white;
+}
+
+.bg-primary .nav-pills .nav-link.active {
+  color: #0d6efd;
+  background-color: white;
+}
+
+header .nav-item {
+  display: flex;
+  align-items:center;
+}
+
+/** Channel Nav **/
+.channel-nav ul {
+  list-style-type: none;
+}
+
+.channel-nav a {
+  color: white;
 }
 
 /** Messages **/

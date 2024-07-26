@@ -2,31 +2,12 @@ import React, { useState } from 'react';
 
 import { ComposeForm } from './ComposeForm.js'
 
-import INITIAL_CHAT_LOG from '../data/chat_log.json'
-
 export function ChatPane(props) {
-  const { currentChannel, currentUser } = props;
-
-  const [msgStateArray, setMsgStateArray] = useState(INITIAL_CHAT_LOG);
-
-  /* STATE MANAGEMENT: how do we change */
-  const addMessage = (userObj, msgText) => {
-    const newMessageObj = {
-      "userId": userObj.userId,
-      "userName": userObj.userName,
-      "userImg": userObj.userImg,
-      "text": msgText,
-      "timestamp": Date.now(),
-      "channel": currentChannel
-    }
-
-    const updateMessageArray = [...msgStateArray, newMessageObj];
-    setMsgStateArray(updateMessageArray); //update the state and re-render
-  }
+  const { currentChannel, currentUser, messageArray, addMessageFunction } = props;
 
   /* RENDERING: what do we look like */
   // Data Processing (structure data)
-  const messageObjArray = msgStateArray
+  const messageObjArray = messageArray
     .filter((chatObj) => chatObj.channel === currentChannel)
     .sort((m1, m2) => m1.timestamp - m2.timestamp); //chron order
 
@@ -47,7 +28,7 @@ export function ChatPane(props) {
         {messageElemArray}
       </div>
 
-      <ComposeForm currentUser={currentUser} currentChannel={currentChannel} addMessageFunction={addMessage} />
+      <ComposeForm currentUser={currentUser} currentChannel={currentChannel} addMessageFunction={addMessageFunction} />
   </>
   )
 }
