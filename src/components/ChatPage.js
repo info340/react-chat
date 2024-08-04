@@ -9,11 +9,9 @@ export default function ChatPage(props) {
   const {currentUser, messageArray, addMessageFunction} = props;
 
   const paramsObj = useParams();
-  const currentChannel = paramsObj.channelName;
+  const currentChannel = paramsObj.channelName || "general";
 
   const channelNamesArray = ["general", "social", "random", "dank-memes", "birds"];
-  //const currentChannel = "general" //hard code for the moment
-  //be dependent on the URL
 
   return (
     <div className="row flex-grow-1">

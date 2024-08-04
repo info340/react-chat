@@ -7,7 +7,7 @@ export function HeaderBar(props) {
 
   return (
     <header className="text-light bg-primary px-1 d-flex justify-content-between">
-      <h1>React Chat</h1>
+      <h1>React Chat - Live!</h1>
 
       <nav>
         {/* links go here */}

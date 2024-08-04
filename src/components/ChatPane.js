@@ -7,12 +7,12 @@ export function ChatPane(props) {
 
   /* RENDERING: what do we look like */
   // Data Processing (structure data)
-  const messageObjArray = messageArray
+  const messagestoShowArray = messageArray
     .filter((chatObj) => chatObj.channel === currentChannel)
     .sort((m1, m2) => m1.timestamp - m2.timestamp); //chron order
 
   // Displaying Data (convert to HTML)
-  const messageElemArray = messageObjArray.map((chatObj) => {
+  const messageElemArray = messagestoShowArray.map((chatObj) => {
     const elem = <MessageItem key={chatObj.timestamp} messageData={chatObj} />
     return elem; //put it in the new array!
   });
@@ -28,7 +28,10 @@ export function ChatPane(props) {
         {messageElemArray}
       </div>
 
-      <ComposeForm currentUser={currentUser} currentChannel={currentChannel} addMessageFunction={addMessageFunction} />
+      <ComposeForm 
+        currentUser={currentUser} 
+        currentChannel={currentChannel} 
+        addMessageFunction={addMessageFunction} />
   </>
   )
 }

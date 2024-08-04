@@ -8,7 +8,6 @@ export default function SignInPage(props) {
 
   const handleClick = (event) => {
     const whichUser = event.currentTarget.name //access button, not image
-    console.log(whichUser);
     const selectedUserObj = DEFAULT_USERS.filter((userObj) => userObj.userId === whichUser)[0] || DEFAULT_USERS[0] //null user if not found
 
     changeUserFunction(selectedUserObj)
