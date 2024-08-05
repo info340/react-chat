@@ -9,7 +9,7 @@ export function ChatPane(props) {
   // Data Processing (structure data)
   const messagestoShowArray = messageArray
     .filter((chatObj) => chatObj.channel === currentChannel)
-    .sort((m1, m2) => m1.timestamp - m2.timestamp); //chron order
+    .sort((m1, m2) => m2.timestamp - m1.timestamp); //chron order
 
   // Displaying Data (convert to HTML)
   const messageElemArray = messagestoShowArray.map((chatObj) => {
